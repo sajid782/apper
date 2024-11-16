@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Unique Section</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        .faiz-unique-section {
+            padding: 2rem 0;
+        }
+
+        .faiz-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .faiz-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -1rem;
+        }
+
+        .faiz-column {
+            flex: 1;
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .faiz-heading {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        /* Left Container Styles */
+        .faiz-left-container .faiz-box-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faiz-left-container .faiz-box {
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .faiz-left-container .faiz-box:hover {
+            transform: scale(1.05);
+        }
+
+        .faiz-left-container .faiz-box:active {
+            transform: scale(0.95);
+        }
+
+        .faiz-left-container .faiz-box-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        .faiz-left-container .faiz-box-1 { background-color: #e3f2fd;}
+        .faiz-left-container .faiz-box-2 { background-color: #e8f5e9;}
+        .faiz-left-container .faiz-box-3 { background-color: #fff9c4;}
+        .faiz-left-container .faiz-box-4 { background-color: #fce4ec;}
+        .faiz-left-container .faiz-box-5 { background-color: #f3e5f5;}
+
+        /* Right Container Styles */
+        .faiz-right-container .faiz-expandable-box {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faiz-right-container .faiz-expandable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s ease;
+        }
+
+        .faiz-right-container .faiz-expandable-header:hover {
+            background-color: #e9ecef;
+        }
+
+        .faiz-right-container .faiz-expandable-content {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faiz-right-container .faiz-expandable-box.faiz-active .faiz-expandable-content {
+            max-height: 200px;
+            padding: 1rem;
+        }
+
+        .faiz-right-container .faiz-chevron {
+            transition: transform 0.3s ease;
+        }
+
+        .faiz-right-container .faiz-expandable-box.faiz-active .faiz-chevron {
+            transform: rotate(180deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .faiz-row {
+                flex-direction: column;
+            }
+            .faiz-column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="faiz-unique-section">
+        <div class="faiz-container">
+            <div class="faiz-row">
+                <!-- Left Container -->
+                <div class="faiz-column faiz-left-container">
+                    <h2 class="faiz-heading">Systematic Review Papers</h2>
+                    <div class="faiz-box-container">
+                        <div class="faiz-box faiz-box-1">
+                            <span class="faiz-box-icon" role="img" aria-label="Star"></span>
+                            <p>Choice of Databases & Search Strategy</p>
+                        </div>
+                        <div class="faiz-box faiz-box-2">
+                            <span class="faiz-box-icon" role="img" aria-label="Clover"></span>
+                            <p>Criteria for Inclusion and Exclusion of Studies</p>
+                        </div>
+                        <div class="faiz-box faiz-box-3">
+                            <span class="faiz-box-icon" role="img" aria-label="Sun"></span>
+                            <p>Extraction of Data and Assessment of Quality</p>
+                        </div>
+                        <div class="faiz-box faiz-box-4">
+                            <span class="faiz-box-icon" role="img" aria-label="Flower"></span>
+                            <p>If clear (Synthesis & Meta-Analysis)</p>
+                        </div>
+                        <div class="faiz-box faiz-box-5">
+                            <span class="faiz-box-icon" role="img" aria-label="Crystal Ball"></span>
+                            <p>Transparent structure and academic reporting</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Container -->
+                <div class="faiz-column faiz-right-container">
+                    <h2 class="faiz-heading">Our Process: Simple & Effective</h2>
+                    <div class="faiz-expandable-container">
+                        <div class="faiz-expandable-box">
+                            <div class="faiz-expandable-header" tabindex="0" role="button" aria-expanded="false">
+                                <span>Submit Your Request</span>
+                                <span class="faiz-chevron">▼</span>
+                            </div>
+                            <div class="faiz-expandable-content">
+                                <p>Get started by filling out our easy-to-use order form or contact us via email for a custom consultation.Provide details of your project and any specific requirements.</p>
+                            </div>
+                        </div>
+                        <div class="faiz-expandable-box">
+                            <div class="faiz-expandable-header" tabindex="0" role="button" aria-expanded="false">
+                                <span>Get a Customized Quote</span>
+                                <span class="faiz-chevron">▼</span>
+                            </div>
+                            <div class="faiz-expandable-content">
+                                <p>After reviewing your request, we provide transparent, no-obligation information tailored to your project complexity and timeline..</p>
+                            </div>
+                        </div>
+                        <div class="faiz-expandable-box">
+                            <div class="faiz-expandable-header" tabindex="0" role="button" aria-expanded="false">
+                                <span>Collaborative Writing Process</span>
+                                <span class="faiz-chevron">▼</span>
+                            </div>
+                            <div class="faiz-expandable-content">
+                                <p>We will assign an experienced writer/reviewer for your project. You can contact them throughout the process to provide feedback and ensure the project stays on track.</p>
+                            </div>
+                        </div>
+                        <div class="faiz-expandable-box">
+                            <div class="faiz-expandable-header" tabindex="0" role="button" aria-expanded="false">
+                                <span>Receive Your Completed Work</span>
+                                <span class="faiz-chevron">▼</span>
+                            </div>
+                            <div class="faiz-expandable-content">
+                                <p>Once your letter, proposal, presentation, or manuscript is ready, we will deliver it to you in a timely manner. We also offer modifications as needed to ensure they meet your expectations.</p>
+                            </div>
+                        </div>
+                        <div class="faiz-expandable-box">
+                            <div class="faiz-expandable-header" tabindex="0" role="button" aria-expanded="false">
+                                <span>Submit & Succeed</span>
+                                <span class="faiz-chevron">▼</span>
+                            </div>
+                            <div class="faiz-expandable-content">
+                                <p>Whether you are submitting your paper to a journal, conference, or your university, we make sure it is book-ready or ready.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Right container expandable boxes
+            const expandableBoxes = document.querySelectorAll('.faiz-expandable-box');
+            expandableBoxes.forEach(box => {
+                const header = box.querySelector('.faiz-expandable-header');
+                header.addEventListener('click', () => {
+                    box.classList.toggle('faiz-active');
+                    const isExpanded = box.classList.contains('faiz-active');
+                    header.setAttribute('aria-expanded', isExpanded);
+                });
+
+                // Keyboard accessibility
+                header.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        header.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unique Section with Interactive Boxes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        .unique-section {
+            padding: 2rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -1rem;
+        }
+
+        .column {
+            flex: 1;
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        /* Left Container Styles */
+        .left-container .box-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .left-container .box {
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .left-container .box.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .left-container .box-1 { background-color: #e3f2fd; transform: rotate(3deg); }
+        .left-container .box-2 { background-color: #e8f5e9; transform: rotate(-3deg); }
+        .left-container .box-3 { background-color: #fff9c4; transform: skew(3deg); }
+        .left-container .box-4 { background-color: #fce4ec; transform: skew(-3deg); }
+        .left-container .box-5 { background-color: #f3e5f5; transform: scale(1.05); }
+
+        /* Right Container Styles */
+        .right-container .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .right-container .grid-box {
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .right-container .grid-box-1 { grid-column: 1 / -1; background-color: #ffcdd2; }
+        .right-container .grid-box-2 { background-color: #ffe0b2; }
+        .right-container .grid-box-3 { background-color: #e0f2f1; }
+        .right-container .grid-box-4 { 
+            grid-column: 1 / -1; 
+            background-color: #e8eaf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .right-container .grid-box-5 { grid-column: 1 / -1; background-color: #f5f5f5; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+            }
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="unique-section">
+        <div class="container">
+            <div class="row">
+                <!-- Left Container -->
+                <div class="column left-container">
+                    <h2>Interactive Boxes</h2>
+                    <div class="box-container">
+                        <div class="box box-1">
+                            <p>Interactive Box 1</p>
+                        </div>
+                        <div class="box box-2">
+                            <p>Interactive Box 2</p>
+                        </div>
+                        <div class="box box-3">
+                            <p>Interactive Box 3</p>
+                        </div>
+                        <div class="box box-4">
+                            <p>Interactive Box 4</p>
+                        </div>
+                        <div class="box box-5">
+                            <p>Interactive Box 5</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Container -->
+                <div class="column right-container">
+                    <h2>Unique Layout Boxes</h2>
+                    <div class="grid-container">
+                        <div class="grid-box grid-box-1">
+                            <p>This is a full-width box with some interesting content.</p>
+                        </div>
+                        <div class="grid-box grid-box-2">
+                            <p>A smaller box with concise information.</p>
+                        </div>
+                        <div class="grid-box grid-box-3">
+                            <p>Another small box with a brief message.</p>
+                        </div>
+                        <div class="grid-box grid-box-4">
+                            <p>A centered text box spanning the full width.</p>
+                        </div>
+                        <div class="grid-box grid-box-5">
+                            <p>The final box, again using the full width of the container.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const boxes = document.querySelectorAll('.left-container .box');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    } else {
+                        entry.target.classList.remove('animate-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            boxes.forEach(box => {
+                observer.observe(box);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Interactive Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .section {
+            padding: 4rem 1rem;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a202c;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #6b46c1, #9f7aea);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .box-container {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s ease;
+        }
+
+        .box-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2), 0 15px 20px -10px rgba(0, 0, 0, 0.08);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #2d3748;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #6b46c1, #9f7aea);
+            border-radius: 2px;
+        }
+
+        .box-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .left .box-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .right .box-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .box {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6b46c1, #9f7aea);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .box:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .box:hover::before {
+            opacity: 0.8;
+        }
+
+        .box h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+            position: relative;
+            z-index: 2;
+            transition: color 0.4s ease;
+        }
+
+        .box p {
+            font-size: 1rem;
+            color: #718096;
+            position: relative;
+            z-index: 2;
+            transition: color 0.4s ease;
+        }
+
+        .box:hover h4, .box:hover p {
+            color: #ffffff;
+        }
+
+        .box.active {
+            background-color: #6b46c1;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .box.active h4, .box.active p {
+            color: #ffffff;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .box-container {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .box-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6b46c1, #9f7aea);
+            width: 0;
+            transition: width 0.3s linear;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particleAnimation 1s ease-out forwards;
+        }
+
+        @keyframes particleAnimation {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h2>Enhanced Interactive Section</h2>
+            <div class="grid">
+                <!-- Left Box -->
+                <div class="box-container left">
+                    <h3>Left Container</h3>
+                    <div class="box-grid">
+                        <div class="box fade-in" data-index="0">
+                            <h4>Box 1</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="box fade-in" data-index="1">
+                            <h4>Box 2</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="box fade-in" data-index="2">
+                            <h4>Box 3</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="box fade-in" data-index="3">
+                            <h4>Box 4</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="box fade-in" data-index="4">
+                            <h4>Box 5</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Box -->
+                <div class="box-container right">
+                    <h3>Right Container</h3>
+                    <div class="box-grid">
+                        <div class="box fade-in" data-index="5">
+                            <h4>Box 1</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="box fade-in" data-index="6">
+                            <h4>Box 2</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="box fade-in" data-index="7">
+                            <h4>Box 3</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="box fade-in" data-index="8">
+                            <h4>Box 4</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="box fade-in" data-index="9">
+                            <h4>Box 5</h4>
+                            <p>Click to see more details</p>
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const boxes = document.querySelectorAll('.box');
+            let activeBox = null;
+            let interval;
+            const cycleTime = 5000; // 5 seconds
+
+            function setActiveBox(index) {
+                if (activeBox !== null) {
+                    boxes[activeBox].classList.remove('active');
+                    boxes[activeBox].querySelector('p').textContent = 'Click to see more details';
+                    boxes[activeBox].querySelector('.progress-bar').style.width = '0';
+                }
+                boxes[index].classList.add('active');
+                boxes[index].querySelector('p').textContent = `Active content for Box ${index % 5 + 1}`;
+                activeBox = index;
+                animateProgressBar(boxes[index].querySelector('.progress-bar'));
+            }
+
+            function cycleActiveBox() {
+                const nextIndex = (activeBox === null) ? 0 : (activeBox + 1) % boxes.length;
+                setActiveBox(nextIndex);
+            }
+
+            function animateProgressBar(progressBar) {
+                let width = 0;
+                const animationInterval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(animationInterval);
+                    } else {
+                        width++;
+                        progressBar.style.width = width + '%';
+                    }
+                }, cycleTime / 100);
+            }
+
+            function createParticles(event, element) {
+                const rect = element.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.left = x + 'px';
+                    particle.style.top = y + 'px';
+                    particle.style.setProperty('--x', (Math.random() - 0.5) * 100 + 'px');
+                    particle.style.setProperty('--y', (Math.random() - 0.5) * 100 + 'px');
+                    particle.style.background = `hsl(${Math.random() * 90 + 250}, 70%, 60%)`;
+                    particle.style.width = particle.style.height = Math.random() * 8 + 4 + 'px';
+                    element.appendChild(particle);
+
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }
+            }
+
+            boxes.forEach((box, index) => {
+                box.addEventListener('click', (event) => {
+                    setActiveBox(index);
+                    clearInterval(interval);
+                    interval = setInterval(cycleActiveBox, cycleTime);
+                    createParticles(event, box);
+                });
+
+                // Staggered fade-in effect
+                setTimeout(() => {
+                    box.style.opacity = '1';
+                    box.style.transform = 'translateY(0)';
+                }, index * 100);
+
+                // Hover effect
+                box.addEventListener('mousemove', (e) => {
+                    const rect = box.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    box.style.setProperty('--x', x + 'px');
+                    box.style.setProperty('--y', y + 'px');
+                });
+            });
+
+            // Start the automatic cycling
+            interval = setInterval(cycleActiveBox, cycleTime);
+
+            // Intersection Observer for box containers
+            const boxContainers = document.querySelectorAll('.box-container');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            boxContainers.forEach(container => observer.observe(container));
+
+            // Parallax effect on scroll
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                document.querySelectorAll('.box-container').forEach((container, index) => {
+                    container.style.transform = `translateY(${scrollY * 0.1 * (index + 1)}px)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
